@@ -41,10 +41,6 @@ class BigNumber {
                     carry = temp/10
                 }
             }
-            
-            
-            // 99
-            // 9999
         } else {
             smallNr = right.myNumber.count
             bigNr = left.myNumber.count
