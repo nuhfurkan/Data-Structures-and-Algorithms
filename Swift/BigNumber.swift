@@ -21,6 +21,45 @@ class BigNumber {
         }
     }
     
+    static func * (left: BigNumber, right: BigNumber) -> BigNumber {
+        let lft:String = String(left.toString().reversed())
+        let rgt:String = String(right.toString().reversed())
+        var cnt = 0
+        var temp: String = ""
+        var bigNumbers: [BigNumber] = []
+        
+        
+        for nr1 in lft {
+            var carry = 0
+            let nr1Digit: Int = nr1.wholeNumberValue ?? 1
+            var smn = 0
+            while smn < cnt {
+                temp.append("0")
+                smn += 1
+            }
+            for l in rgt {
+                let nr2Digit: Int = l.wholeNumberValue ?? 1
+                let number = nr1Digit * nr2Digit + carry
+                temp.append(String(number%10))
+                carry = number/10
+            }
+            if (carry != 0) {
+                temp.append(String(carry))
+            }
+            
+            //print("nr1_\(nr1) * \(rgt) = \(String(temp.reversed()))")
+            cnt += 1
+            bigNumbers.append(BigNumber(newNumber: String(temp.reversed())))
+            temp = ""
+        }
+        var finNumber = BigNumber(newNumber: "0")
+        for bgnm in bigNumbers {
+            finNumber = finNumber + bgnm
+        }
+        
+        return finNumber
+    }
+    
     static func + (left: BigNumber, right: BigNumber) -> BigNumber {
         var newNumber: [Int] = []
         let smallNr: Int
@@ -41,6 +80,10 @@ class BigNumber {
                     carry = temp/10
                 }
             }
+            
+            
+            // 99
+            // 9999
         } else {
             smallNr = right.myNumber.count
             bigNr = left.myNumber.count
