@@ -21,6 +21,28 @@ class BigNumber {
         }
     }
     
+    init(newNumber: Int) {
+        let nm = String(newNumber)
+        for x in nm {
+            if let num: Int = x.wholeNumberValue {
+                myNumber.append(num)
+            } else {
+                print("something happened!")
+            }
+        }
+    }
+    
+    func pow(pow: Int) -> BigNumber {
+        let res = self
+        let half = pow/2
+        
+        if pow == 1 {
+            return res
+        }
+        
+        return res.pow(pow: pow-half) * res.pow(pow: half)
+    }
+    
     static func * (left: BigNumber, right: BigNumber) -> BigNumber {
         let lft:String = String(left.toString().reversed())
         let rgt:String = String(right.toString().reversed())
